@@ -100,11 +100,16 @@ jobs:
           retention-days: 30
 
       - name: Release APK
-        shell: bash
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "Sumer v1.0.0 (Android APK)"
+          body: |
+            ### لعبة سومر (Sumer) للهاتف Android 🎮
+            
+            - تم البناء والتصدير بنجاح عبر Godot 4.7
+            - معماريات مدعومة: ARM64-v8a
+            - ملف APK جاهز للتثبيت المباشر على الهاتف.
+          files: build/sumer.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create v1.0.0 build/sumer.apk \
-            --title "Sumer v1.0.0 (Android APK)" \
-            --notes "لعبة سومر (Sumer) للهاتف Android جاهزة للتحميل المباشر والتثبيت." \
-            --clobber
